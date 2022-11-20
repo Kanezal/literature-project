@@ -17,11 +17,11 @@ let phrases = [
         phrase: "Никогда и ничего не просите! Никогда и ничего, и в особенности у тех, кто сильнее вас. Сами предложат и сами всё дадут!",
         author: "Воланд"
     },
-    {
-        ind: 1,
-        phrase: "Кто сказал тебе, что нет на свете настоящей, верной, вечной любви? Да отрежут лгуну его гнусный язык!",
-        author: "Михаил Булгаков"
-    },
+    // {
+    //     ind: 1,
+    //     phrase: "Кто сказал тебе, что нет на свете настоящей, верной, вечной любви? Да отрежут лгуну его гнусный язык!",
+    //     author: "Михаил Булгаков"
+    // },
     {
         ind: 2,
         phrase: "Мы говорим с тобой на разных языках, как всегда, но вещи, о которых мы говорим, от этого не меняются.",
@@ -79,7 +79,7 @@ let phrases = [
     },
     {
         ind: 13,
-        phrase: "Да, человек смертен, но это было бы еще полбеды. Плохо то, что он иногда внезапно смертен, вот в чем фокус!",
+        phrase: "Да, человек смертен, но это было бы еще полбеды. Плохо то, что он иногда внезапно смертен.",
         author: "Воланд"
     },
     {
@@ -99,17 +99,17 @@ changeBtn.addEventListener("click", (ev) => {
     if (phrases.length == 0) {
         smoothly(portraitEl, 'src', `img/100.jpg`)
         smoothly(phraseEl, 'textContent', "Вовремя прочитанная книга — огромная удача.")
-        smoothly(authorEl, 'textContent', "Петр Павленко");
-        ev.preventDefault()
+        smoothly(authorEl, 'textContent', "Петр Павленко")
+        return audio.stop()
     }
-
 
     if (audio) {
         audio.stop()
-        
     } else {
-        changeBtn.textContent = "Узнать ещё"
+        smoothly(changeBtn, 'textContent', "Узнать ещё")
+        smoothly(authorEl, 'textContent', "")
     } 
+
     let randIndex = getRandomIndex(phrases)
     let randEl = phrases[randIndex]
 
@@ -120,11 +120,12 @@ changeBtn.addEventListener("click", (ev) => {
         onplay: function () {
             smoothly(portraitEl, 'src', images[randEl.ind].src)
             smoothly(phraseEl, 'textContent', randEl.phrase)
+            smoothly(authorEl, 'textContent', "")
         },
 
-        onstop: function () {
-            smoothly(authorEl, 'textContent', "");
-        },
+        // onstop: function () {
+        //     smoothly(authorEl, 'textContent', "");
+        // },
 
         onend: function () {
             smoothly(authorEl, 'textContent', randEl.author);
