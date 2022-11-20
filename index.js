@@ -98,8 +98,8 @@ const changeBtn = document.getElementById("newPhraseBtn")
 changeBtn.addEventListener("click", (ev) => {
     if (phrases.length == 0) {
         smoothly(portraitEl, 'src', `img/100.jpg`)
-        smoothly(phraseEl, 'textContent', "Вовремя прочитанная книга — огромная удача.")
-        smoothly(authorEl, 'textContent', "Петр Павленко")
+        smoothly(phraseEl, 'textContent', "За мной, читатель!")
+        smoothly(authorEl, 'textContent', "Михаил Булгаков")
         return audio.stop()
     }
 
@@ -108,6 +108,7 @@ changeBtn.addEventListener("click", (ev) => {
     } else {
         smoothly(changeBtn, 'textContent', "Узнать ещё")
         smoothly(authorEl, 'textContent', "")
+        portraitEl.style.height = "auto"
     } 
 
     let randIndex = getRandomIndex(phrases)
